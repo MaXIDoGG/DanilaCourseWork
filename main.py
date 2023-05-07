@@ -28,20 +28,22 @@ while True:
     print('5 - Сортировка по свойству')
     print('6 - Фильтрация')
     print('7 - Преобразование')
+
     v = input()
     if v not in ('1', '2', '3', '4', '5', '6', '7'):
         print('Неверный выбор')
         print('Попробуйте еще раз\n')
         continue
 
+    brands = [i.brand for i in carArray]
+    models = [i.model for i in carArray]
+    releases = [i.release for i in carArray]
+    prices = [(str(i.price) + ' тыс. руб.') for i in carArray]
+    df = pd.DataFrame({"Марка автомобиля": brands,
+                       "Модель": models, "Год выпуска": releases, "Цена": prices})
+
     if v == '1':
         if (len(carArray) != 0):
-            brands = [i.brand for i in carArray]
-            models = [i.model for i in carArray]
-            releases = [i.release for i in carArray]
-            prices = [(str(i.price) + ' тыс. руб.') for i in carArray]
-            df = pd.DataFrame({"Марка автомобиля": brands,
-                              "Модель": models, "Год выпуска": releases, "Цена": prices})
             print(df)
 
         else:
@@ -61,7 +63,9 @@ while True:
     elif v == '4':
         choice = int(input("Введите номер объекта, который хотите удалить: "))
         if choice >= 0 and choice < len(carArray):
-            carArray.pop(choice-1)
+            carArray.pop(choice)
+        else:
+            print("Автомобиля с таким номером не существует")
     elif v == '5':
         print('Введите свойство:')
         print('1 - Марка')
@@ -78,12 +82,13 @@ while True:
             carArray = sorted(carArray, key=lambda x: x.release)
         elif carProperty == 4:
             carArray = sorted(carArray, key=lambda x: x.price)
+        else:
+            print('Нет свойства с таким номером.')
     elif v == '6':
         year = int(input('Введите год выпуска: '))
-        for i in carArray:
-            if i.release >= year:
-                print("Марка автомобиля: {0}, модель: {1}, год выпуска: {2}, цена: {3} тыс. руб.".format(
-                    i.brand, i.model, i.release, i.price))
+        newDf = df.loc[df["Год выпуска"] >= year]
+        print(newDf)
+
     elif v == '7':
         percent = int(input('Введите процент скидки: '))
         for i in carArray:
