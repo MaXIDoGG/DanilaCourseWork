@@ -39,11 +39,20 @@ while True:
             brands = [i.brand for i in carArray]
             models = [i.model for i in carArray]
             releases = [i.release for i in carArray]
+<<<<<<< HEAD
             prices = [(str(i.price) + ' тыс. руб.') for i in carArray]
             df = pd.DataFrame({"Марка автомобиля": brands,
                               "Модель": models, "Год выпуска": releases, "Цена": prices})
             print(df)
 
+=======
+            prices = [str(i.price) + ' тыс. руб.' for i in carArray]
+            df = pd.DataFrame({"Марка автомобиля": brands, "Модель": models,
+                               "Год выпуска": releases, "Цена": prices})
+            print(df)
+            # for i in carArray:
+            #     print("Марка автомобиля: {0}, модель: {1}, год выпуска: {2}, цена: {3} тыс. руб.".format(i.brand, i.model, i.release, i.price))
+>>>>>>> e8617221eb771fd047aa85ae4c46831625b4c4fa
         else:
             print("Автосалон пуст.")
     elif v == '2':
