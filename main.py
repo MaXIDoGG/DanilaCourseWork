@@ -49,6 +49,7 @@ while True:
         else:
             print("Автосалон пуст.")
     elif v == '2':
+        print("До встречи!")
         break
     elif v == '3':
         if (len(carArray) < 12):
@@ -61,11 +62,14 @@ while True:
         else:
             print("Автосалон полон.")
     elif v == '4':
+        if (len(carArray) == 0):
+            print("Автосалон пуст")
+            continue
         choice = int(input("Введите номер объекта, который хотите удалить: "))
         if choice >= 0 and choice < len(carArray):
             carArray.pop(choice)
         else:
-            print("Автомобиля с таким номером не существует")
+            print("Автомобиля с таким номером не существует.")
     elif v == '5':
         print('Введите свойство:')
         print('1 - Марка')
